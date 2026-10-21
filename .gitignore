@@ -1,0 +1,6 @@
+data/raw/*.csv
+outputs/delivery_orders.csv
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store

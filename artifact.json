@@ -1,0 +1,1090 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "The promise clock: where Olist deliveries break",
+    "description": "A decision-ready supply chain case study using historical Olist orders.",
+    "generatedAt": "2026-10-21T16:41:04.426445+00:00",
+    "filters": [],
+    "cards": [
+      {
+        "id": "late_rate",
+        "description": "Delivered orders that arrived after the promised calendar date.",
+        "dataset": "overall",
+        "sourceId": "source_overall",
+        "metrics": [
+          {
+            "label": "Late deliveries",
+            "field": "late_rate",
+            "format": "percent"
+          }
+        ]
+      },
+      {
+        "id": "late_count",
+        "description": "Eligible delivered orders arriving after the promised date.",
+        "dataset": "overall",
+        "sourceId": "source_overall",
+        "metrics": [
+          {
+            "label": "Late orders",
+            "field": "late_orders",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "feb_mar",
+        "description": "Share of all late orders purchased in February and March 2018.",
+        "dataset": "overall",
+        "sourceId": "source_overall",
+        "metrics": [
+          {
+            "label": "Late orders in Feb–Mar 2018",
+            "field": "feb_mar_late_share",
+            "format": "percent"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "monthly",
+        "title": "Monthly late-delivery rate",
+        "subtitle": "Complete purchase months, January 2017–July 2018; partial August excluded",
+        "type": "line",
+        "dataset": "monthly",
+        "sourceId": "source_monthly",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "month",
+            "type": "ordinal",
+            "label": "Purchase month"
+          },
+          "y": {
+            "field": "late_rate",
+            "type": "quantitative",
+            "label": "Late rate"
+          },
+          "tooltip": [
+            {
+              "field": "orders",
+              "type": "quantitative",
+              "label": "Delivered orders"
+            },
+            {
+              "field": "late_orders",
+              "type": "quantitative",
+              "label": "Late orders"
+            }
+          ],
+          "color": {
+            "field": "phase",
+            "type": "nominal",
+            "label": "Period"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0.06866803235412135,
+            "label": "Overall 6.9%",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ]
+      },
+      {
+        "id": "slack",
+        "title": "Late risk by time left at carrier handoff",
+        "subtitle": "Late rate compared with the 6.9% cohort average; valid delivery stages",
+        "type": "bar",
+        "dataset": "slack",
+        "sourceId": "source_slack",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "handoff_slack_band",
+            "type": "ordinal",
+            "label": "Time left at carrier handoff"
+          },
+          "y": {
+            "fields": [
+              "Cohort average",
+              "Handoff window"
+            ],
+            "type": "quantitative",
+            "label": "Late rate"
+          },
+          "tooltip": [
+            {
+              "field": "orders",
+              "type": "quantitative",
+              "label": "Orders"
+            }
+          ]
+        },
+        "palette": {
+          "kind": "categorical"
+        },
+        "settings": {
+          "groupMode": "grouped",
+          "sort": "none"
+        }
+      },
+      {
+        "id": "state",
+        "title": "Late-delivery gap versus expected by customer state",
+        "subtitle": "Positive means fewer late deliveries than expected; negative means more, after month and promise adjustment",
+        "type": "bar",
+        "dataset": "state_adjusted",
+        "sourceId": "source_state_adjusted",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "customer_state",
+            "type": "nominal",
+            "label": "Customer state"
+          },
+          "y": {
+            "field": "performance_gap",
+            "type": "quantitative",
+            "label": "Fewer / more late than expected"
+          },
+          "tooltip": [
+            {
+              "field": "orders",
+              "type": "quantitative",
+              "label": "Orders"
+            },
+            {
+              "field": "observed",
+              "type": "quantitative",
+              "label": "Late orders"
+            },
+            {
+              "field": "expected",
+              "type": "quantitative",
+              "label": "Expected late orders"
+            }
+          ]
+        },
+        "palette": {
+          "kind": "semantic"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0,
+            "label": "Expected",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "settings": {
+          "sort": "none"
+        }
+      },
+      {
+        "id": "reviews",
+        "title": "Low review rate by delivery outcome",
+        "subtitle": "State × month standardized; reviewed orders in comparable strata",
+        "type": "bar",
+        "dataset": "reviews",
+        "sourceId": "source_reviews",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "comparison",
+            "type": "nominal",
+            "label": "Reviewed orders"
+          },
+          "y": {
+            "fields": [
+              "On time",
+              "Late"
+            ],
+            "type": "quantitative",
+            "label": "Low review rate"
+          }
+        },
+        "palette": {
+          "kind": "categorical"
+        },
+        "labels": {
+          "values": "all"
+        },
+        "settings": {
+          "groupMode": "grouped"
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "promise",
+        "title": "Promise-length cohorts",
+        "subtitle": "Delivered orders by days promised from purchase",
+        "dataset": "promise",
+        "sourceId": "source_promise",
+        "defaultSort": {
+          "field": "orders",
+          "direction": "desc"
+        },
+        "columns": [
+          {
+            "field": "promise_band",
+            "label": "Promised days",
+            "type": "text"
+          },
+          {
+            "field": "orders",
+            "label": "Orders",
+            "format": "number"
+          },
+          {
+            "field": "late_rate",
+            "label": "Late rate",
+            "format": "percent"
+          },
+          {
+            "field": "median_actual_days",
+            "label": "Median actual days",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "state_table",
+        "title": "Geographic risk adjustment",
+        "subtitle": "Customer states with at least 1,000 eligible deliveries",
+        "dataset": "state_adjusted",
+        "sourceId": "source_state_adjusted",
+        "defaultSort": {
+          "field": "observed_expected_ratio",
+          "direction": "desc"
+        },
+        "columns": [
+          {
+            "field": "customer_state",
+            "label": "State",
+            "type": "text"
+          },
+          {
+            "field": "orders",
+            "label": "Orders",
+            "format": "number"
+          },
+          {
+            "field": "observed",
+            "label": "Late",
+            "format": "number"
+          },
+          {
+            "field": "expected",
+            "label": "Expected",
+            "format": "number"
+          },
+          {
+            "field": "observed_expected_ratio",
+            "label": "Observed / expected",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "source_overall",
+        "label": "Olist delivery analysis — overall",
+        "path": "outputs/overall.csv"
+      },
+      {
+        "id": "source_monthly",
+        "label": "Olist delivery analysis — monthly",
+        "path": "outputs/monthly.csv"
+      },
+      {
+        "id": "source_slack",
+        "label": "Olist delivery analysis — slack",
+        "path": "outputs/slack.csv"
+      },
+      {
+        "id": "source_state_adjusted",
+        "label": "Olist delivery analysis — state adjusted",
+        "path": "outputs/state_adjusted.csv"
+      },
+      {
+        "id": "source_promise",
+        "label": "Olist delivery analysis — promise",
+        "path": "outputs/promise.csv"
+      },
+      {
+        "id": "source_reviews",
+        "label": "Olist delivery analysis — reviews",
+        "path": "outputs/reviews.csv"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# The promise clock: where Olist deliveries break"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "body": "## Executive Summary\n\n- **A short period drove a disproportionate share of failures.** February–March 2018 contributed 2,254 late deliveries, 34.7% of all late orders from 14.3% of eligible volume. The late rate outside those months was 5.2%.\n- **A short-buffer handoff alert is useful but cannot solve most delays.** Orders with three or fewer calendar days left at handoff had a 58.5% late rate, yet accounted for only 10.5% of late orders with valid stages. 69.4% of late orders still had more than 14 days left at handoff.\n- **Risk differs by destination even after a simple mix adjustment.** Rio de Janeiro observed 1.80 times the late orders expected for its purchase-month and promise-length mix; Bahia was also about 1.80 times expected. This points to routes and local conditions worth investigating, not proof of a carrier cause.\n- **Customer experience is strongly associated with lateness.** Within comparable state × month groups, 58.1% of late orders had a low review versus 9.4% of on-time orders. This is an association, not a causal estimate."
+      },
+      {
+        "id": "problem",
+        "type": "markdown",
+        "body": "## The decision this project supports\n\n**Problem statement.** A headline on-time rate hides when a promised delivery becomes hard to meet. A fulfillment leader needs to know whether to change seller handoff practices, carrier routing, promise design, or customer communication, and where each action should be tested.\n\nThe primary outcome is arrival after the published **calendar date**. The analysis uses delivered purchases from January 2017 through August 18, 2018, with a 60-day observation buffer before the last recorded delivery. It covers 94,702 eligible delivered orders. This is historical diagnosis, not a live operations feed.\n\n**Decision rule.** Prioritize an intervention only if it addresses a measured concentration of failures, has an owner, and can be evaluated against both late delivery and customer experience.",
+        "sourceId": "source_overall"
+      },
+      {
+        "id": "metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "late_rate",
+          "late_count",
+          "feb_mar"
+        ]
+      },
+      {
+        "id": "shock",
+        "type": "markdown",
+        "body": "## A two-month shock dominates the failure count\n\nThe February–March 2018 cohort had 2,254 late orders across 13,558 eligible deliveries. March alone reached an 18.96% late rate, while the full cohort rate was 6.87%. The monthly pattern argues for a surge or incident review before treating the full-period average as a steady operating baseline. The data does not record weather, strikes, capacity, or carrier identity, so it cannot identify the external cause.",
+        "sourceId": "source_overall"
+      },
+      {
+        "id": "monthly_chart",
+        "type": "chart",
+        "chartId": "monthly"
+      },
+      {
+        "id": "stage",
+        "type": "markdown",
+        "body": "## A short-buffer alert catches only one in ten late orders\n\nOf 6,500 late orders with valid stage dates, only 322 had already missed the promised calendar date at carrier handoff. An alert for three or fewer days remaining would flag 1,162 orders, of which 680 were late: 58.5% precision, but only 10.5% of all late orders captured.\n\nThe other side is easy to miss: 69.4% of late orders had **more than 14 days** left at handoff. A handoff alert is a focused recovery tool. The larger problem requires route and transit-tail investigation with carrier and scan data. These observations do not assign delay to a particular party."
+      },
+      {
+        "id": "slack_chart",
+        "type": "chart",
+        "chartId": "slack"
+      },
+      {
+        "id": "geography",
+        "type": "markdown",
+        "body": "## Geographic gaps survive a basic promise and season adjustment\n\nRio de Janeiro recorded 1,493 late deliveries versus 832 expected from its purchase-month and promise-length mix. Bahia recorded 395 versus 219. São Paulo recorded 1,794 versus 2,660 expected. These are large descriptive gaps; product mix, seller origin, carriers, and local route characteristics remain unobserved. Start route-level investigation in the elevated states, but avoid ranking carriers or sellers from customer state alone.",
+        "sourceId": "source_state_adjusted"
+      },
+      {
+        "id": "state_chart",
+        "type": "chart",
+        "chartId": "state"
+      },
+      {
+        "id": "state_table_block",
+        "type": "table",
+        "tableId": "state_table"
+      },
+      {
+        "id": "promises",
+        "type": "markdown",
+        "body": "## Short promises are a distinct risk, but longer promises can conceal slow service\n\nThe 900 orders promised in seven days or less had a 21.0% late rate. Orders promised more than 30 days had a 5.0% late rate, yet their median actual delivery was about 15 days. A lower late rate can therefore reflect more generous promises as well as faster execution. The metric must be paired with actual delivery time and customer expectations; this table is not evidence that promises should simply be extended.",
+        "sourceId": "source_promise"
+      },
+      {
+        "id": "promise_table",
+        "type": "table",
+        "tableId": "promise"
+      },
+      {
+        "id": "seller",
+        "type": "markdown",
+        "body": "## Seller deadline compliance is a warning signal, not a blame score\n\nFor 93,463 single-seller delivered orders, 5,382 were handed to the carrier after the latest item shipping-limit date. Their late-delivery rate was 26.8%, versus 5.7% when within that limit. The dates are tightly related to the same operational timeline; the gap does not measure the effect of seller behavior. Multi-seller baskets are excluded because one order-level carrier timestamp cannot reliably assign responsibility to each seller.",
+        "sourceId": "source_overall"
+      },
+      {
+        "id": "reviews",
+        "type": "markdown",
+        "body": "## Late arrival and poor reviews travel together\n\nA low review means an order-level average score of 1 or 2. The simple late versus on-time comparison is 62.5% versus 9.2%; after weighting comparable state × purchase-month groups, it is 58.1% versus 9.4%. Standardization still cannot isolate delivery from product quality, service recovery, or who chooses to review. Use review impact as a guardrail in an intervention test, not as a revenue or causal loss estimate.",
+        "sourceId": "source_overall"
+      },
+      {
+        "id": "review_chart",
+        "type": "chart",
+        "chartId": "reviews"
+      },
+      {
+        "id": "actions",
+        "type": "markdown",
+        "body": "## Recommended operating tests\n\n1. **Pilot a focused handoff alert.** Flag orders with three or fewer calendar days left, then track its late-order capture and false alarms. It addresses a small, high-risk subset.\n2. **Investigate the long-slack transit tail.** Add carrier, seller origin, pickup, hub, and delivery-attempt scans. Compare lanes within destination and promise cohorts; prioritize the paths behind most late orders.\n3. **Review the February–March 2018 spike as an incident.** Compare capacity, holidays, weather, and route events from operational logs before assigning a cause. Monitor surge volume and late rate together.\n4. **Pilot route-specific recovery in RJ and BA.** Test rerouting or proactive communication on comparable orders with a holdout, tracking actual delivery time, late rate, and low reviews.\n5. **Review promise policy on short-window orders.** Compare conversion, actual speed, late rate, and reviews. Extending dates alone would improve the SLA number without proving better service."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions that could change the decision\n\n- **What is the economic loss?** Freight value is a customer charge, not carrier cost, refund expense, or contribution margin. Those records are needed to size savings.\n- **Where exactly is the bottleneck?** Add seller origin, carrier, pickup scan, hub events, and delivery attempts. The current order-level handoff and arrival dates do not identify a failed lane or facility.\n- **What happened to orders never marked delivered?** The mature purchase cohort includes 1,092 shipped, 601 unavailable, 554 canceled, and other unresolved statuses. A delivered-only on-time rate cannot describe all customer outcomes.\n- **Does an intervention work?** The findings are observational. Measure changes with a randomized or carefully matched pilot, tracking both delivery speed and customer outcomes."
+      },
+      {
+        "id": "caveats",
+        "type": "markdown",
+        "body": "## Caveats and assumptions\n\nThe source is an anonymized 2016–2018 public e-commerce dataset, so the project demonstrates an analytical method, not current Olist performance. Delivery is judged by calendar date; timestamp-based lateness would answer a different question. The 60-day buffer reduces recent-order censoring but does not resolve the 2,857 non-eligible orders in the purchase cohort. Stage analysis excludes 1 missing carrier timestamp and 174 chronologically invalid stage records. Reviews cover 99.3% of eligible delivered orders. Geographic adjustment controls only purchase month and promise band. No inventory, carrier cost, or route-event data are available."
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-10-21T16:41:04.426445+00:00",
+    "status": "ready",
+    "datasets": {
+      "overall": [
+        {
+          "orders": 94702,
+          "late_orders": 6503,
+          "late_rate": 0.06866803235412135,
+          "median_promise_days": 23.285503472222224,
+          "median_actual_days": 10.31582175925926,
+          "p90_actual_days": 23.151065972222227,
+          "mean_review": 4.1523321497168535,
+          "median_handoff_days": 2.2166782407407406,
+          "median_transit_days": 7.144282407407408,
+          "late_stage_eligible": 6500,
+          "late_already_past_promise_at_handoff": 322,
+          "late_already_past_promise_share": 0.04953846153846154,
+          "late_median_handoff_share_of_actual": 0.1131595038566427,
+          "late_over_7_days_share": 0.43953846153846154,
+          "short_slack_orders": 1162,
+          "short_slack_late_orders": 680,
+          "short_slack_late_rate": 0.5851979345955249,
+          "short_slack_late_capture": 0.10461538461538461,
+          "long_slack_late_share": 0.6943076923076923,
+          "feb_mar_orders": 13558,
+          "feb_mar_late_orders": 2254,
+          "other_months_late_rate": 0.052363699102829536,
+          "single_seller_orders": 93463,
+          "single_seller_after_shipping_limit": 5382,
+          "single_seller_after_limit_late_rate": 0.2684875510962467,
+          "single_seller_within_limit_late_rate": 0.05727682474086352,
+          "reviewed_orders": 94062,
+          "low_review_on_time": 0.09248554913294797,
+          "low_review_late": 0.6254133207368918,
+          "low_review_standardized_on_time": 0.09383108439085784,
+          "low_review_standardized_late": 0.5807949944103004,
+          "review_standardization_strata": 113,
+          "review_standardization_orders": 68416,
+          "feb_mar_late_share": 0.34660925726587727
+        }
+      ],
+      "monthly": [
+        {
+          "month": "2017-01",
+          "orders": 750,
+          "late_orders": 22,
+          "late_rate": 0.029333333333333333,
+          "median_promise_days": 38.98290509259259,
+          "median_actual_days": 10.733645833333334,
+          "p90_actual_days": 19.25670601851852,
+          "mean_review": 4.199055330634278,
+          "phase": "All months"
+        },
+        {
+          "month": "2017-02",
+          "orders": 1653,
+          "late_orders": 49,
+          "late_rate": 0.029643073200241985,
+          "median_promise_days": 30.17646990740741,
+          "median_actual_days": 10.971203703703704,
+          "p90_actual_days": 22.07396527777777,
+          "mean_review": 4.202678027997566,
+          "phase": "All months"
+        },
+        {
+          "month": "2017-03",
+          "orders": 2546,
+          "late_orders": 116,
+          "late_rate": 0.04556166535742341,
+          "median_promise_days": 22.585219907407406,
+          "median_actual_days": 10.126487268518519,
+          "p90_actual_days": 21.140549768518518,
+          "mean_review": 4.187376335575782,
+          "phase": "All months"
+        },
+        {
+          "month": "2017-04",
+          "orders": 2303,
+          "late_orders": 151,
+          "late_rate": 0.06556665219279201,
+          "median_promise_days": 25.47054398148148,
+          "median_actual_days": 12.748622685185186,
+          "p90_actual_days": 25.32400462962967,
+          "mean_review": 4.137554585152839,
+          "phase": "All months"
+        },
+        {
+          "month": "2017-05",
+          "orders": 3545,
+          "late_orders": 106,
+          "late_rate": 0.029901269393511988,
+          "median_promise_days": 23.33525462962963,
+          "median_actual_days": 9.793333333333333,
+          "p90_actual_days": 19.238615740740734,
+          "mean_review": 4.238271253909582,
+          "phase": "All months"
+        },
+        {
+          "month": "2017-06",
+          "orders": 3135,
+          "late_orders": 95,
+          "late_rate": 0.030303030303030304,
+          "median_promise_days": 23.41980324074074,
+          "median_actual_days": 10.804907407407407,
+          "p90_actual_days": 19.8245787037037,
+          "mean_review": 4.222918675666988,
+          "phase": "All months"
+        },
+        {
+          "month": "2017-07",
+          "orders": 3872,
+          "late_orders": 108,
+          "late_rate": 0.027892561983471075,
+          "median_promise_days": 23.01266782407407,
+          "median_actual_days": 10.158072916666665,
+          "p90_actual_days": 19.75363888888889,
+          "mean_review": 4.258415755682805,
+          "phase": "All months"
+        },
+        {
+          "month": "2017-08",
+          "orders": 4193,
+          "late_orders": 122,
+          "late_rate": 0.02909611256856666,
+          "median_promise_days": 22.552777777777777,
+          "median_actual_days": 9.769814814814815,
+          "p90_actual_days": 19.22268287037037,
+          "mean_review": 4.3115246098439375,
+          "phase": "All months"
+        },
+        {
+          "month": "2017-09",
+          "orders": 4150,
+          "late_orders": 182,
+          "late_rate": 0.04385542168674699,
+          "median_promise_days": 22.138738425925926,
+          "median_actual_days": 10.314432870370371,
+          "p90_actual_days": 20.32938888888889,
+          "mean_review": 4.267484215638659,
+          "phase": "All months"
+        },
+        {
+          "month": "2017-10",
+          "orders": 4478,
+          "late_orders": 187,
+          "late_rate": 0.041759714158106295,
+          "median_promise_days": 22.398171296296297,
+          "median_actual_days": 10.263362268518518,
+          "p90_actual_days": 20.08619328703704,
+          "mean_review": 4.205240665766982,
+          "phase": "All months"
+        },
+        {
+          "month": "2017-11",
+          "orders": 7288,
+          "late_orders": 904,
+          "late_rate": 0.12403951701427003,
+          "median_promise_days": 22.269305555555555,
+          "median_actual_days": 12.698680555555555,
+          "p90_actual_days": 27.210305555555557,
+          "mean_review": 3.9887384275252176,
+          "phase": "All months"
+        },
+        {
+          "month": "2017-12",
+          "orders": 5513,
+          "late_orders": 411,
+          "late_rate": 0.07455106112824234,
+          "median_promise_days": 27.43806712962963,
+          "median_actual_days": 13.1421875,
+          "p90_actual_days": 28.262770833333335,
+          "mean_review": 4.0895440395531955,
+          "phase": "All months"
+        },
+        {
+          "month": "2018-01",
+          "orders": 7069,
+          "late_orders": 403,
+          "late_rate": 0.05700947800254633,
+          "median_promise_days": 25.569814814814816,
+          "median_actual_days": 11.830115740740741,
+          "p90_actual_days": 25.464164351851842,
+          "mean_review": 4.108726650506203,
+          "phase": "All months"
+        },
+        {
+          "month": "2018-02",
+          "orders": 6555,
+          "late_orders": 926,
+          "late_rate": 0.14126620900076278,
+          "median_promise_days": 24.260381944444443,
+          "median_actual_days": 14.26375,
+          "p90_actual_days": 31.01614351851852,
+          "mean_review": 3.8817171251472775,
+          "phase": "All months"
+        },
+        {
+          "month": "2018-02",
+          "orders": 6555,
+          "late_orders": 926,
+          "late_rate": 0.14126620900076278,
+          "median_promise_days": 24.260381944444443,
+          "median_actual_days": 14.26375,
+          "p90_actual_days": 31.01614351851852,
+          "mean_review": 3.8817171251472775,
+          "phase": "Feb–Mar 2018"
+        },
+        {
+          "month": "2018-03",
+          "orders": 7003,
+          "late_orders": 1328,
+          "late_rate": 0.18963301442239042,
+          "median_promise_days": 21.323680555555555,
+          "median_actual_days": 13.367731481481481,
+          "p90_actual_days": 32.18501388888889,
+          "mean_review": 3.8132556131260795,
+          "phase": "All months"
+        },
+        {
+          "month": "2018-03",
+          "orders": 7003,
+          "late_orders": 1328,
+          "late_rate": 0.18963301442239042,
+          "median_promise_days": 21.323680555555555,
+          "median_actual_days": 13.367731481481481,
+          "p90_actual_days": 32.18501388888889,
+          "mean_review": 3.8132556131260795,
+          "phase": "Feb–Mar 2018"
+        },
+        {
+          "month": "2018-04",
+          "orders": 6798,
+          "late_orders": 306,
+          "late_rate": 0.04501323918799647,
+          "median_promise_days": 23.41991898148148,
+          "median_actual_days": 9.314728009259259,
+          "p90_actual_days": 21.415079861111114,
+          "mean_review": 4.2062351895734595,
+          "phase": "All months"
+        },
+        {
+          "month": "2018-05",
+          "orders": 6749,
+          "late_orders": 443,
+          "late_rate": 0.06563935397836716,
+          "median_promise_days": 21.464895833333333,
+          "median_actual_days": 9.14787037037037,
+          "p90_actual_days": 21.44504398148148,
+          "mean_review": 4.236239214519488,
+          "phase": "All months"
+        },
+        {
+          "month": "2018-06",
+          "orders": 6096,
+          "late_orders": 71,
+          "late_rate": 0.011646981627296589,
+          "median_promise_days": 27.27822337962963,
+          "median_actual_days": 7.95761574074074,
+          "p90_actual_days": 15.914866898148148,
+          "mean_review": 4.307312252964427,
+          "phase": "All months"
+        },
+        {
+          "month": "2018-07",
+          "orders": 6156,
+          "late_orders": 208,
+          "late_rate": 0.03378817413905133,
+          "median_promise_days": 19.332650462962963,
+          "median_actual_days": 7.5017245370370365,
+          "p90_actual_days": 16.00616898148148,
+          "mean_review": 4.317750898986597,
+          "phase": "All months"
+        }
+      ],
+      "slack": [
+        {
+          "handoff_slack_band": "past promise",
+          "orders": 322,
+          "late_orders": 322,
+          "late_rate": 1.0,
+          "median_promise_days": 17.193136574074074,
+          "median_actual_days": 26.716811342592592,
+          "p90_actual_days": 54.94283796296299,
+          "mean_review": 1.8306709265175718,
+          "Cohort average": 0.06866803235412135,
+          "Handoff window": 1.0
+        },
+        {
+          "handoff_slack_band": "0–3 days",
+          "orders": 840,
+          "late_orders": 358,
+          "late_rate": 0.4261904761904762,
+          "median_promise_days": 6.496221064814815,
+          "median_actual_days": 8.067436342592593,
+          "p90_actual_days": 28.29179745370371,
+          "mean_review": 3.742168674698795,
+          "Cohort average": 0.06866803235412135,
+          "Handoff window": 0.4261904761904762
+        },
+        {
+          "handoff_slack_band": "4–7 days",
+          "orders": 2710,
+          "late_orders": 361,
+          "late_rate": 0.13321033210332103,
+          "median_promise_days": 9.287251157407407,
+          "median_actual_days": 6.486782407407407,
+          "p90_actual_days": 18.257670138888887,
+          "mean_review": 4.128592758491974,
+          "Cohort average": 0.06866803235412135,
+          "Handoff window": 0.13321033210332103
+        },
+        {
+          "handoff_slack_band": "8–14 days",
+          "orders": 15710,
+          "late_orders": 946,
+          "late_rate": 0.06021642266072565,
+          "median_promise_days": 13.640179398148149,
+          "median_actual_days": 6.178842592592593,
+          "p90_actual_days": 16.703304398148152,
+          "mean_review": 4.213410599560308,
+          "Cohort average": 0.06866803235412135,
+          "Handoff window": 0.06021642266072565
+        },
+        {
+          "handoff_slack_band": ">14 days",
+          "orders": 74945,
+          "late_orders": 4513,
+          "late_rate": 0.06021749282807392,
+          "median_promise_days": 25.15326388888889,
+          "median_actual_days": 11.32798611111111,
+          "p90_actual_days": 24.01786111111112,
+          "mean_review": 4.154633820915437,
+          "Cohort average": 0.06866803235412135,
+          "Handoff window": 0.06021749282807392
+        }
+      ],
+      "state_adjusted": [
+        {
+          "customer_state": "CE",
+          "orders": 1269,
+          "observed": 176,
+          "expected": 85.07828951758742,
+          "observed_expected_ratio": 2.0686828684257597,
+          "performance_gap": -1.0686828684257597
+        },
+        {
+          "customer_state": "BA",
+          "orders": 3240,
+          "observed": 395,
+          "expected": 219.3626926039628,
+          "observed_expected_ratio": 1.8006708219666714,
+          "performance_gap": -0.8006708219666714
+        },
+        {
+          "customer_state": "RJ",
+          "orders": 12146,
+          "observed": 1493,
+          "expected": 831.5210963726649,
+          "observed_expected_ratio": 1.7955046558805265,
+          "performance_gap": -0.7955046558805265
+        },
+        {
+          "customer_state": "ES",
+          "orders": 1973,
+          "observed": 214,
+          "expected": 140.7419850874582,
+          "observed_expected_ratio": 1.5205128723104102,
+          "performance_gap": -0.5205128723104102
+        },
+        {
+          "customer_state": "PE",
+          "orders": 1581,
+          "observed": 153,
+          "expected": 105.32672257100224,
+          "observed_expected_ratio": 1.4526228127611256,
+          "performance_gap": -0.4526228127611256
+        },
+        {
+          "customer_state": "SC",
+          "orders": 3502,
+          "observed": 291,
+          "expected": 251.30802030467302,
+          "observed_expected_ratio": 1.1579415557339015,
+          "performance_gap": -0.15794155573390145
+        },
+        {
+          "customer_state": "RS",
+          "orders": 5283,
+          "observed": 325,
+          "expected": 351.39600744365333,
+          "observed_expected_ratio": 0.9248824491897907,
+          "performance_gap": 0.07511755081020932
+        },
+        {
+          "customer_state": "GO",
+          "orders": 1933,
+          "observed": 128,
+          "expected": 140.88346868958325,
+          "observed_expected_ratio": 0.9085523034787697,
+          "performance_gap": 0.0914476965212303
+        },
+        {
+          "customer_state": "DF",
+          "orders": 2041,
+          "observed": 118,
+          "expected": 152.3549379827125,
+          "observed_expected_ratio": 0.7745072234769922,
+          "performance_gap": 0.2254927765230078
+        },
+        {
+          "customer_state": "SP",
+          "orders": 39499,
+          "observed": 1794,
+          "expected": 2659.962675249013,
+          "observed_expected_ratio": 0.6744455539520133,
+          "performance_gap": 0.32555444604798667
+        },
+        {
+          "customer_state": "MG",
+          "orders": 11149,
+          "observed": 518,
+          "expected": 818.3690465558834,
+          "observed_expected_ratio": 0.6329662664784422,
+          "performance_gap": 0.36703373352155777
+        },
+        {
+          "customer_state": "PR",
+          "orders": 4829,
+          "observed": 199,
+          "expected": 348.83971284245825,
+          "observed_expected_ratio": 0.5704625725622922,
+          "performance_gap": 0.42953742743770784
+        }
+      ],
+      "promise": [
+        {
+          "promise_band": "22–30",
+          "orders": 41096,
+          "late_orders": 3074,
+          "late_rate": 0.07480046719875413,
+          "median_promise_days": 24.541417824074074,
+          "median_actual_days": 11.652505787037038,
+          "p90_actual_days": 23.52315972222222,
+          "mean_review": 4.128607123609818
+        },
+        {
+          "promise_band": "15–21",
+          "orders": 22959,
+          "late_orders": 1729,
+          "late_rate": 0.07530815802081972,
+          "median_promise_days": 18.25412037037037,
+          "median_actual_days": 8.018912037037037,
+          "p90_actual_days": 17.857886574074076,
+          "mean_review": 4.185030850659414
+        },
+        {
+          "promise_band": ">30",
+          "orders": 19520,
+          "late_orders": 983,
+          "late_rate": 0.05035860655737705,
+          "median_promise_days": 34.117285879629634,
+          "median_actual_days": 14.984658564814815,
+          "p90_actual_days": 29.651750000000007,
+          "mean_review": 4.07405209193504
+        },
+        {
+          "promise_band": "8–14",
+          "orders": 10227,
+          "late_orders": 528,
+          "late_rate": 0.05162804341449105,
+          "median_promise_days": 11.664212962962964,
+          "median_actual_days": 4.970717592592592,
+          "p90_actual_days": 10.042703703703705,
+          "mean_review": 4.313464373464374
+        },
+        {
+          "promise_band": "≤7",
+          "orders": 900,
+          "late_orders": 189,
+          "late_rate": 0.21,
+          "median_promise_days": 4.960792824074074,
+          "median_actual_days": 4.067916666666667,
+          "p90_actual_days": 8.155212962962963,
+          "mean_review": 4.264870931537598
+        }
+      ],
+      "reviews": [
+        {
+          "comparison": "Low reviews",
+          "On time": 0.09383108439085784,
+          "Late": 0.5807949944103004
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "source_overall",
+      "label": "Olist delivery analysis — overall",
+      "path": "outputs/overall.csv",
+      "description": "Historical Olist orders transformed at order grain by analyze.py; purchase cohort January 2017–August 18, 2018.",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_csv_auto('outputs/overall.csv')",
+        "description": "Loads the reviewed overall extract.",
+        "tables_used": [
+          "outputs/overall.csv"
+        ],
+        "filters": [
+          "Purchases January 2017–August 18, 2018",
+          "Delivered orders with actual and promised delivery dates"
+        ],
+        "metric_definitions": {
+          "late_rate": "Delivered orders arriving after the estimated calendar date / eligible delivered orders.",
+          "observed_expected_ratio": "Observed state late orders / expected state late orders from pooled month × promise-band rates.",
+          "low_review_rate": "Orders with mean review score at most 2 / reviewed orders; standardized over comparable state × month strata."
+        },
+        "executed_at": "2026-10-21T16:41:04.426445+00:00"
+      }
+    },
+    {
+      "id": "source_monthly",
+      "label": "Olist delivery analysis — monthly",
+      "path": "outputs/monthly.csv",
+      "description": "Historical Olist orders transformed at order grain by analyze.py; purchase cohort January 2017–August 18, 2018.",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT *, 'All months' AS phase FROM read_csv_auto('outputs/monthly.csv') WHERE month < '2018-08' UNION ALL SELECT *, 'Feb–Mar 2018' AS phase FROM read_csv_auto('outputs/monthly.csv') WHERE month IN ('2018-02', '2018-03') ORDER BY month, phase",
+        "description": "Loads the reviewed monthly extract.",
+        "tables_used": [
+          "outputs/monthly.csv"
+        ],
+        "filters": [
+          "Purchases January 2017–August 18, 2018",
+          "Delivered orders with actual and promised delivery dates",
+          "Monthly chart excludes partial August 2018"
+        ],
+        "metric_definitions": {
+          "late_rate": "Delivered orders arriving after the estimated calendar date / eligible delivered orders.",
+          "observed_expected_ratio": "Observed state late orders / expected state late orders from pooled month × promise-band rates.",
+          "low_review_rate": "Orders with mean review score at most 2 / reviewed orders; standardized over comparable state × month strata."
+        },
+        "executed_at": "2026-10-21T16:41:04.426445+00:00"
+      }
+    },
+    {
+      "id": "source_slack",
+      "label": "Olist delivery analysis — slack",
+      "path": "outputs/slack.csv",
+      "description": "Historical Olist orders transformed at order grain by analyze.py; purchase cohort January 2017–August 18, 2018.",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT *, 0.06866803235412135 AS \"Cohort average\", late_rate AS \"Handoff window\" FROM read_csv_auto('outputs/slack.csv')",
+        "description": "Loads the reviewed slack extract.",
+        "tables_used": [
+          "outputs/slack.csv"
+        ],
+        "filters": [
+          "Purchases January 2017–August 18, 2018",
+          "Delivered orders with actual and promised delivery dates"
+        ],
+        "metric_definitions": {
+          "late_rate": "Delivered orders arriving after the estimated calendar date / eligible delivered orders.",
+          "observed_expected_ratio": "Observed state late orders / expected state late orders from pooled month × promise-band rates.",
+          "low_review_rate": "Orders with mean review score at most 2 / reviewed orders; standardized over comparable state × month strata."
+        },
+        "executed_at": "2026-10-21T16:41:04.426445+00:00"
+      }
+    },
+    {
+      "id": "source_state_adjusted",
+      "label": "Olist delivery analysis — state adjusted",
+      "path": "outputs/state_adjusted.csv",
+      "description": "Historical Olist orders transformed at order grain by analyze.py; purchase cohort January 2017–August 18, 2018.",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT *, 1.0 - observed_expected_ratio AS performance_gap FROM read_csv_auto('outputs/state_adjusted.csv') ORDER BY observed_expected_ratio DESC",
+        "description": "Loads the reviewed state adjusted extract.",
+        "tables_used": [
+          "outputs/state_adjusted.csv"
+        ],
+        "filters": [
+          "Purchases January 2017–August 18, 2018",
+          "Delivered orders with actual and promised delivery dates"
+        ],
+        "metric_definitions": {
+          "late_rate": "Delivered orders arriving after the estimated calendar date / eligible delivered orders.",
+          "observed_expected_ratio": "Observed state late orders / expected state late orders from pooled month × promise-band rates.",
+          "low_review_rate": "Orders with mean review score at most 2 / reviewed orders; standardized over comparable state × month strata."
+        },
+        "executed_at": "2026-10-21T16:41:04.426445+00:00"
+      }
+    },
+    {
+      "id": "source_promise",
+      "label": "Olist delivery analysis — promise",
+      "path": "outputs/promise.csv",
+      "description": "Historical Olist orders transformed at order grain by analyze.py; purchase cohort January 2017–August 18, 2018.",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_csv_auto('outputs/promise.csv')",
+        "description": "Loads the reviewed promise extract.",
+        "tables_used": [
+          "outputs/promise.csv"
+        ],
+        "filters": [
+          "Purchases January 2017–August 18, 2018",
+          "Delivered orders with actual and promised delivery dates"
+        ],
+        "metric_definitions": {
+          "late_rate": "Delivered orders arriving after the estimated calendar date / eligible delivered orders.",
+          "observed_expected_ratio": "Observed state late orders / expected state late orders from pooled month × promise-band rates.",
+          "low_review_rate": "Orders with mean review score at most 2 / reviewed orders; standardized over comparable state × month strata."
+        },
+        "executed_at": "2026-10-21T16:41:04.426445+00:00"
+      }
+    },
+    {
+      "id": "source_reviews",
+      "label": "Olist delivery analysis — reviews",
+      "path": "outputs/reviews.csv",
+      "description": "Historical Olist orders transformed at order grain by analyze.py; purchase cohort January 2017–August 18, 2018.",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT comparison, on_time AS \"On time\", late AS \"Late\" FROM read_csv_auto('outputs/reviews.csv')",
+        "description": "Loads the reviewed reviews extract.",
+        "tables_used": [
+          "outputs/reviews.csv"
+        ],
+        "filters": [
+          "Purchases January 2017–August 18, 2018",
+          "Delivered orders with actual and promised delivery dates"
+        ],
+        "metric_definitions": {
+          "late_rate": "Delivered orders arriving after the estimated calendar date / eligible delivered orders.",
+          "observed_expected_ratio": "Observed state late orders / expected state late orders from pooled month × promise-band rates.",
+          "low_review_rate": "Orders with mean review score at most 2 / reviewed orders; standardized over comparable state × month strata."
+        },
+        "executed_at": "2026-10-21T16:41:04.426445+00:00"
+      }
+    }
+  ]
+}

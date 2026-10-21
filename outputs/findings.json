@@ -1,0 +1,610 @@
+{
+  "quality": {
+    "source_orders": 99441,
+    "source_items": 112650,
+    "source_reviews": 99224,
+    "cohort_orders": 97559,
+    "delivered_eligible": 94702,
+    "delivered_missing_carrier": 1,
+    "invalid_stage_order": 174,
+    "multiple_seller_orders": 1239,
+    "review_coverage": 0.9932419589871386,
+    "last_observed_delivery": "2018-10-17 13:22:46",
+    "purchase_cutoff": "2018-08-18 13:22:46",
+    "cohort_statuses": {
+      "delivered": 94710,
+      "shipped": 1092,
+      "unavailable": 601,
+      "canceled": 554,
+      "processing": 299,
+      "invoiced": 296,
+      "created": 5,
+      "approved": 2
+    },
+    "delivered_missing_promise": 0,
+    "delivered_missing_customer_date": 8
+  },
+  "overall": {
+    "orders": 94702,
+    "late_orders": 6503,
+    "late_rate": 0.06866803235412135,
+    "median_promise_days": 23.285503472222224,
+    "median_actual_days": 10.31582175925926,
+    "p90_actual_days": 23.151065972222227,
+    "mean_review": 4.1523321497168535,
+    "median_handoff_days": 2.2166782407407406,
+    "median_transit_days": 7.144282407407408,
+    "late_stage_eligible": 6500,
+    "late_already_past_promise_at_handoff": 322,
+    "late_already_past_promise_share": 0.04953846153846154,
+    "late_median_handoff_share_of_actual": 0.1131595038566427,
+    "late_over_7_days_share": 0.43953846153846154,
+    "short_slack_orders": 1162,
+    "short_slack_late_orders": 680,
+    "short_slack_late_rate": 0.5851979345955249,
+    "short_slack_late_capture": 0.10461538461538461,
+    "long_slack_late_share": 0.6943076923076923,
+    "feb_mar_orders": 13558,
+    "feb_mar_late_orders": 2254,
+    "other_months_late_rate": 0.052363699102829536,
+    "single_seller_orders": 93463,
+    "single_seller_after_shipping_limit": 5382,
+    "single_seller_after_limit_late_rate": 0.2684875510962467,
+    "single_seller_within_limit_late_rate": 0.05727682474086352,
+    "reviewed_orders": 94062,
+    "low_review_on_time": 0.09248554913294797,
+    "low_review_late": 0.6254133207368918,
+    "low_review_standardized_on_time": 0.09383108439085784,
+    "low_review_standardized_late": 0.5807949944103004,
+    "review_standardization_strata": 113,
+    "review_standardization_orders": 68416
+  },
+  "monthly": [
+    {
+      "month": "2017-11",
+      "orders": 7288,
+      "late_orders": 904,
+      "late_rate": 0.12403951701427003,
+      "median_promise_days": 22.269305555555555,
+      "median_actual_days": 12.698680555555555,
+      "p90_actual_days": 27.210305555555557,
+      "mean_review": 3.9887384275252176
+    },
+    {
+      "month": "2018-01",
+      "orders": 7069,
+      "late_orders": 403,
+      "late_rate": 0.05700947800254633,
+      "median_promise_days": 25.569814814814816,
+      "median_actual_days": 11.830115740740741,
+      "p90_actual_days": 25.464164351851842,
+      "mean_review": 4.108726650506203
+    },
+    {
+      "month": "2018-03",
+      "orders": 7003,
+      "late_orders": 1328,
+      "late_rate": 0.18963301442239042,
+      "median_promise_days": 21.323680555555555,
+      "median_actual_days": 13.367731481481481,
+      "p90_actual_days": 32.18501388888889,
+      "mean_review": 3.8132556131260795
+    },
+    {
+      "month": "2018-04",
+      "orders": 6798,
+      "late_orders": 306,
+      "late_rate": 0.04501323918799647,
+      "median_promise_days": 23.41991898148148,
+      "median_actual_days": 9.314728009259259,
+      "p90_actual_days": 21.415079861111114,
+      "mean_review": 4.2062351895734595
+    },
+    {
+      "month": "2018-05",
+      "orders": 6749,
+      "late_orders": 443,
+      "late_rate": 0.06563935397836716,
+      "median_promise_days": 21.464895833333333,
+      "median_actual_days": 9.14787037037037,
+      "p90_actual_days": 21.44504398148148,
+      "mean_review": 4.236239214519488
+    },
+    {
+      "month": "2018-02",
+      "orders": 6555,
+      "late_orders": 926,
+      "late_rate": 0.14126620900076278,
+      "median_promise_days": 24.260381944444443,
+      "median_actual_days": 14.26375,
+      "p90_actual_days": 31.01614351851852,
+      "mean_review": 3.8817171251472775
+    },
+    {
+      "month": "2018-07",
+      "orders": 6156,
+      "late_orders": 208,
+      "late_rate": 0.03378817413905133,
+      "median_promise_days": 19.332650462962963,
+      "median_actual_days": 7.5017245370370365,
+      "p90_actual_days": 16.00616898148148,
+      "mean_review": 4.317750898986597
+    },
+    {
+      "month": "2018-06",
+      "orders": 6096,
+      "late_orders": 71,
+      "late_rate": 0.011646981627296589,
+      "median_promise_days": 27.27822337962963,
+      "median_actual_days": 7.95761574074074,
+      "p90_actual_days": 15.914866898148148,
+      "mean_review": 4.307312252964427
+    },
+    {
+      "month": "2017-12",
+      "orders": 5513,
+      "late_orders": 411,
+      "late_rate": 0.07455106112824234,
+      "median_promise_days": 27.43806712962963,
+      "median_actual_days": 13.1421875,
+      "p90_actual_days": 28.262770833333335,
+      "mean_review": 4.0895440395531955
+    },
+    {
+      "month": "2018-08",
+      "orders": 4850,
+      "late_orders": 365,
+      "late_rate": 0.07525773195876288,
+      "median_promise_days": 13.972199074074075,
+      "median_actual_days": 7.392552083333333,
+      "p90_actual_days": 14.075631944444455,
+      "mean_review": 4.275351821192053
+    },
+    {
+      "month": "2017-10",
+      "orders": 4478,
+      "late_orders": 187,
+      "late_rate": 0.041759714158106295,
+      "median_promise_days": 22.398171296296297,
+      "median_actual_days": 10.263362268518518,
+      "p90_actual_days": 20.08619328703704,
+      "mean_review": 4.205240665766982
+    },
+    {
+      "month": "2017-08",
+      "orders": 4193,
+      "late_orders": 122,
+      "late_rate": 0.02909611256856666,
+      "median_promise_days": 22.552777777777777,
+      "median_actual_days": 9.769814814814815,
+      "p90_actual_days": 19.22268287037037,
+      "mean_review": 4.3115246098439375
+    },
+    {
+      "month": "2017-09",
+      "orders": 4150,
+      "late_orders": 182,
+      "late_rate": 0.04385542168674699,
+      "median_promise_days": 22.138738425925926,
+      "median_actual_days": 10.314432870370371,
+      "p90_actual_days": 20.32938888888889,
+      "mean_review": 4.267484215638659
+    },
+    {
+      "month": "2017-07",
+      "orders": 3872,
+      "late_orders": 108,
+      "late_rate": 0.027892561983471075,
+      "median_promise_days": 23.01266782407407,
+      "median_actual_days": 10.158072916666665,
+      "p90_actual_days": 19.75363888888889,
+      "mean_review": 4.258415755682805
+    },
+    {
+      "month": "2017-05",
+      "orders": 3545,
+      "late_orders": 106,
+      "late_rate": 0.029901269393511988,
+      "median_promise_days": 23.33525462962963,
+      "median_actual_days": 9.793333333333333,
+      "p90_actual_days": 19.238615740740734,
+      "mean_review": 4.238271253909582
+    },
+    {
+      "month": "2017-06",
+      "orders": 3135,
+      "late_orders": 95,
+      "late_rate": 0.030303030303030304,
+      "median_promise_days": 23.41980324074074,
+      "median_actual_days": 10.804907407407407,
+      "p90_actual_days": 19.8245787037037,
+      "mean_review": 4.222918675666988
+    },
+    {
+      "month": "2017-03",
+      "orders": 2546,
+      "late_orders": 116,
+      "late_rate": 0.04556166535742341,
+      "median_promise_days": 22.585219907407406,
+      "median_actual_days": 10.126487268518519,
+      "p90_actual_days": 21.140549768518518,
+      "mean_review": 4.187376335575782
+    },
+    {
+      "month": "2017-04",
+      "orders": 2303,
+      "late_orders": 151,
+      "late_rate": 0.06556665219279201,
+      "median_promise_days": 25.47054398148148,
+      "median_actual_days": 12.748622685185186,
+      "p90_actual_days": 25.32400462962967,
+      "mean_review": 4.137554585152839
+    },
+    {
+      "month": "2017-02",
+      "orders": 1653,
+      "late_orders": 49,
+      "late_rate": 0.029643073200241985,
+      "median_promise_days": 30.17646990740741,
+      "median_actual_days": 10.971203703703704,
+      "p90_actual_days": 22.07396527777777,
+      "mean_review": 4.202678027997566
+    },
+    {
+      "month": "2017-01",
+      "orders": 750,
+      "late_orders": 22,
+      "late_rate": 0.029333333333333333,
+      "median_promise_days": 38.98290509259259,
+      "median_actual_days": 10.733645833333334,
+      "p90_actual_days": 19.25670601851852,
+      "mean_review": 4.199055330634278
+    }
+  ],
+  "state": [
+    {
+      "customer_state": "SP",
+      "orders": 39499,
+      "late_orders": 1794,
+      "late_rate": 0.045418871363832,
+      "median_promise_days": 19.064108796296296,
+      "median_actual_days": 7.260972222222223,
+      "p90_actual_days": 15.848493055555574,
+      "mean_review": 4.244272995017781
+    },
+    {
+      "customer_state": "RJ",
+      "orders": 12146,
+      "late_orders": 1493,
+      "late_rate": 0.12292112629672321,
+      "median_promise_days": 24.640792824074076,
+      "median_actual_days": 12.121695601851851,
+      "p90_actual_days": 29.182575231481483,
+      "mean_review": 3.958388851876527
+    },
+    {
+      "customer_state": "MG",
+      "orders": 11149,
+      "late_orders": 518,
+      "late_rate": 0.0464615660597363,
+      "median_promise_days": 23.647800925925925,
+      "median_actual_days": 10.396527777777777,
+      "p90_actual_days": 20.23378240740741,
+      "mean_review": 4.189333092681166
+    },
+    {
+      "customer_state": "RS",
+      "orders": 5283,
+      "late_orders": 325,
+      "late_rate": 0.06151807685027447,
+      "median_promise_days": 28.044907407407408,
+      "median_actual_days": 13.213402777777778,
+      "p90_actual_days": 25.929037037037038,
+      "mean_review": 4.183345993163692
+    },
+    {
+      "customer_state": "PR",
+      "orders": 4829,
+      "late_orders": 199,
+      "late_rate": 0.041209360115966036,
+      "median_promise_days": 24.075810185185187,
+      "median_actual_days": 10.595405092592593,
+      "p90_actual_days": 20.165131944444443,
+      "mean_review": 4.234290470245527
+    },
+    {
+      "customer_state": "SC",
+      "orders": 3502,
+      "late_orders": 291,
+      "late_rate": 0.08309537407195888,
+      "median_promise_days": 25.147471064814816,
+      "median_actual_days": 13.075219907407408,
+      "p90_actual_days": 25.839811342592593,
+      "mean_review": 4.130935251798562
+    },
+    {
+      "customer_state": "BA",
+      "orders": 3240,
+      "late_orders": 395,
+      "late_rate": 0.12191358024691358,
+      "median_promise_days": 29.013587962962966,
+      "median_actual_days": 16.948952546296297,
+      "p90_actual_days": 31.868326388888885,
+      "mean_review": 3.9287270463741053
+    },
+    {
+      "customer_state": "DF",
+      "orders": 2041,
+      "late_orders": 118,
+      "late_rate": 0.057814796668299855,
+      "median_promise_days": 24.15858796296296,
+      "median_actual_days": 11.580092592592592,
+      "p90_actual_days": 21.785775462962963,
+      "mean_review": 4.130477597242738
+    },
+    {
+      "customer_state": "ES",
+      "orders": 1973,
+      "late_orders": 214,
+      "late_rate": 0.10846426761277243,
+      "median_promise_days": 25.030868055555555,
+      "median_actual_days": 13.730520833333333,
+      "p90_actual_days": 25.37183796296296,
+      "mean_review": 4.076014381099127
+    },
+    {
+      "customer_state": "GO",
+      "orders": 1933,
+      "late_orders": 128,
+      "late_rate": 0.06621831350232799,
+      "median_promise_days": 26.995891203703703,
+      "median_actual_days": 13.986840277777778,
+      "p90_actual_days": 24.906902777777773,
+      "mean_review": 4.099375650364204
+    },
+    {
+      "customer_state": "PE",
+      "orders": 1581,
+      "late_orders": 153,
+      "late_rate": 0.0967741935483871,
+      "median_promise_days": 31.010254629629628,
+      "median_actual_days": 15.728854166666666,
+      "p90_actual_days": 30.992847222222224,
+      "mean_review": 4.079770261646458
+    },
+    {
+      "customer_state": "CE",
+      "orders": 1269,
+      "late_orders": 176,
+      "late_rate": 0.13869188337273444,
+      "median_promise_days": 31.213113425925926,
+      "median_actual_days": 18.20920138888889,
+      "p90_actual_days": 34.71903240740741,
+      "mean_review": 3.9350752177355504
+    },
+    {
+      "customer_state": "PA",
+      "orders": 941,
+      "late_orders": 106,
+      "late_rate": 0.1126461211477152,
+      "median_promise_days": 36.107638888888886,
+      "median_actual_days": 21.072152777777777,
+      "p90_actual_days": 39.3590625,
+      "mean_review": 3.9073275862068964
+    },
+    {
+      "customer_state": "MT",
+      "orders": 880,
+      "late_orders": 53,
+      "late_rate": 0.060227272727272727,
+      "median_promise_days": 31.209039351851853,
+      "median_actual_days": 16.13753472222222,
+      "p90_actual_days": 27.831172453703704,
+      "mean_review": 4.150630011454754
+    },
+    {
+      "customer_state": "MA",
+      "orders": 710,
+      "late_orders": 124,
+      "late_rate": 0.17464788732394365,
+      "median_promise_days": 30.186221064814816,
+      "median_actual_days": 19.193026620370368,
+      "p90_actual_days": 34.29810648148148,
+      "mean_review": 3.825070821529745
+    },
+    {
+      "customer_state": "MS",
+      "orders": 698,
+      "late_orders": 68,
+      "late_rate": 0.09742120343839542,
+      "median_promise_days": 25.933668981481482,
+      "median_actual_days": 13.966203703703705,
+      "p90_actual_days": 24.740009259259278,
+      "mean_review": 4.156609195402299
+    },
+    {
+      "customer_state": "PB",
+      "orders": 512,
+      "late_orders": 54,
+      "late_rate": 0.10546875,
+      "median_promise_days": 32.47995949074074,
+      "median_actual_days": 18.22974537037037,
+      "p90_actual_days": 34.93654166666667,
+      "mean_review": 4.074950690335306
+    },
+    {
+      "customer_state": "PI",
+      "orders": 474,
+      "late_orders": 66,
+      "late_rate": 0.13924050632911392,
+      "median_promise_days": 29.49298611111111,
+      "median_actual_days": 16.29226851851852,
+      "p90_actual_days": 30.123749999999998,
+      "mean_review": 3.991471215351812
+    },
+    {
+      "customer_state": "RN",
+      "orders": 467,
+      "late_orders": 44,
+      "late_rate": 0.09421841541755889,
+      "median_promise_days": 31.723541666666666,
+      "median_actual_days": 16.06880787037037,
+      "p90_actual_days": 32.79106250000002,
+      "mean_review": 4.136853448275862
+    },
+    {
+      "customer_state": "AL",
+      "orders": 396,
+      "late_orders": 85,
+      "late_rate": 0.21464646464646464,
+      "median_promise_days": 31.41368634259259,
+      "median_actual_days": 22.32938078703704,
+      "p90_actual_days": 39.61049768518519,
+      "mean_review": 3.8524173027989823
+    },
+    {
+      "customer_state": "SE",
+      "orders": 331,
+      "late_orders": 51,
+      "late_rate": 0.1540785498489426,
+      "median_promise_days": 29.530694444444446,
+      "median_actual_days": 17.95724537037037,
+      "p90_actual_days": 35.454108796296296,
+      "mean_review": 3.9
+    },
+    {
+      "customer_state": "TO",
+      "orders": 274,
+      "late_orders": 27,
+      "late_rate": 0.09854014598540146,
+      "median_promise_days": 28.369241898148147,
+      "median_actual_days": 15.865885416666668,
+      "p90_actual_days": 27.954525462962966,
+      "mean_review": 4.153846153846154
+    },
+    {
+      "customer_state": "RO",
+      "orders": 243,
+      "late_orders": 7,
+      "late_rate": 0.02880658436213992,
+      "median_promise_days": 37.9783912037037,
+      "median_actual_days": 17.582361111111112,
+      "p90_actual_days": 29.52628703703704,
+      "mean_review": 4.1652892561983474
+    },
+    {
+      "customer_state": "AM",
+      "orders": 145,
+      "late_orders": 4,
+      "late_rate": 0.027586206896551724,
+      "median_promise_days": 45.402233796296294,
+      "median_actual_days": 25.875138888888888,
+      "p90_actual_days": 39.13307175925926,
+      "mean_review": 4.243055555555555
+    }
+  ],
+  "promise": [
+    {
+      "promise_band": "22\u201330",
+      "orders": 41096,
+      "late_orders": 3074,
+      "late_rate": 0.07480046719875413,
+      "median_promise_days": 24.541417824074074,
+      "median_actual_days": 11.652505787037038,
+      "p90_actual_days": 23.52315972222222,
+      "mean_review": 4.128607123609818
+    },
+    {
+      "promise_band": "15\u201321",
+      "orders": 22959,
+      "late_orders": 1729,
+      "late_rate": 0.07530815802081972,
+      "median_promise_days": 18.25412037037037,
+      "median_actual_days": 8.018912037037037,
+      "p90_actual_days": 17.857886574074076,
+      "mean_review": 4.185030850659414
+    },
+    {
+      "promise_band": ">30",
+      "orders": 19520,
+      "late_orders": 983,
+      "late_rate": 0.05035860655737705,
+      "median_promise_days": 34.117285879629634,
+      "median_actual_days": 14.984658564814815,
+      "p90_actual_days": 29.651750000000007,
+      "mean_review": 4.07405209193504
+    },
+    {
+      "promise_band": "8\u201314",
+      "orders": 10227,
+      "late_orders": 528,
+      "late_rate": 0.05162804341449105,
+      "median_promise_days": 11.664212962962964,
+      "median_actual_days": 4.970717592592592,
+      "p90_actual_days": 10.042703703703705,
+      "mean_review": 4.313464373464374
+    },
+    {
+      "promise_band": "\u22647",
+      "orders": 900,
+      "late_orders": 189,
+      "late_rate": 0.21,
+      "median_promise_days": 4.960792824074074,
+      "median_actual_days": 4.067916666666667,
+      "p90_actual_days": 8.155212962962963,
+      "mean_review": 4.264870931537598
+    }
+  ],
+  "slack": [
+    {
+      "handoff_slack_band": "past promise",
+      "orders": 322,
+      "late_orders": 322,
+      "late_rate": 1.0,
+      "median_promise_days": 17.193136574074074,
+      "median_actual_days": 26.716811342592592,
+      "p90_actual_days": 54.94283796296299,
+      "mean_review": 1.8306709265175718
+    },
+    {
+      "handoff_slack_band": "0\u20133 days",
+      "orders": 840,
+      "late_orders": 358,
+      "late_rate": 0.4261904761904762,
+      "median_promise_days": 6.496221064814815,
+      "median_actual_days": 8.067436342592593,
+      "p90_actual_days": 28.29179745370371,
+      "mean_review": 3.742168674698795
+    },
+    {
+      "handoff_slack_band": "4\u20137 days",
+      "orders": 2710,
+      "late_orders": 361,
+      "late_rate": 0.13321033210332103,
+      "median_promise_days": 9.287251157407407,
+      "median_actual_days": 6.486782407407407,
+      "p90_actual_days": 18.257670138888887,
+      "mean_review": 4.128592758491974
+    },
+    {
+      "handoff_slack_band": "8\u201314 days",
+      "orders": 15710,
+      "late_orders": 946,
+      "late_rate": 0.06021642266072565,
+      "median_promise_days": 13.640179398148149,
+      "median_actual_days": 6.178842592592593,
+      "p90_actual_days": 16.703304398148152,
+      "mean_review": 4.213410599560308
+    },
+    {
+      "handoff_slack_band": ">14 days",
+      "orders": 74945,
+      "late_orders": 4513,
+      "late_rate": 0.06021749282807392,
+      "median_promise_days": 25.15326388888889,
+      "median_actual_days": 11.32798611111111,
+      "p90_actual_days": 24.01786111111112,
+      "mean_review": 4.154633820915437
+    }
+  ]
+}
