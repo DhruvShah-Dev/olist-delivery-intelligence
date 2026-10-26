@@ -49,6 +49,8 @@ The unit is one order. Items and reviews are aggregated before joining. Delivery
 
 The raw Olist CSVs are intentionally not committed. Download them from the [dataset page](https://www.kaggle.com/olistbr/brazilian-ecommerce/home/) and place `olist_orders_dataset.csv`, `olist_order_items_dataset.csv`, `olist_customers_dataset.csv`, `olist_order_reviews_dataset.csv`, and `olist_products_dataset.csv` in `data/raw/`.
 
+`data/source_manifest.json` records the checked source snapshot. `analyze.py` and `validate.py` verify the five CSV checksums before using them. If Kaggle publishes a different revision, review its changes and update the manifest with the new provenance before rebuilding the report.
+
 From the repository root, with Python 3.10 or newer:
 
 ```powershell

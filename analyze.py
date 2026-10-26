@@ -10,8 +10,11 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from verify_source import verify_sources
+
 
 ROOT = Path(__file__).resolve().parent
+verify_sources()
 RAW = ROOT / "data" / "raw"
 OUT = ROOT / "outputs"
 OUT.mkdir(exist_ok=True)

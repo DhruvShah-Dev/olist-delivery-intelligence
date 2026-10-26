@@ -5,8 +5,10 @@ import json
 from pathlib import Path
 
 import duckdb
+from verify_source import verify_sources
 
 ROOT = Path(__file__).resolve().parent
+verify_sources()
 HERE = Path(__file__).resolve().parent
 findings = json.loads((HERE / "outputs" / "findings.json").read_text(encoding="utf-8"))
 q = findings["quality"]
