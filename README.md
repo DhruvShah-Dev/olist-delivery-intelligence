@@ -1,57 +1,86 @@
-# The promise clock: Olist delivery intelligence
+# Olist Delivery Intelligence
 
-An evidence-backed supply chain case study built from historical Brazilian ecommerce orders. Open the [interactive report](report.html) for the full argument or the [dashboard](dashboard.html) for the key views. Both HTML files work offline.
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![DuckDB](https://img.shields.io/badge/DuckDB-validated-FFF000?logo=duckdb&logoColor=111)](https://duckdb.org/)
+[![Report](https://img.shields.io/badge/report-self--contained_HTML-F97316)](report.html)
+[![License: MIT](https://img.shields.io/badge/code_license-MIT-1677C8.svg)](LICENSE-CODE)
 
-## Problem statement
+An evidence-backed shareholder story about delivery reliability in the historical Olist Brazilian ecommerce dataset. The analysis identifies where failures concentrated, when intervention remained possible, and which actions should be tested next.
 
-An on-time delivery rate alone cannot tell a fulfillment team whether missed promises arise before carrier handoff, in transit, from promise design, or from a temporary shock. A useful analysis must show **when the promise became endangered**, how much risk an operational alert could catch, and which gaps survive basic differences in order mix. This project uses **time left on the customer promise at carrier handoff** as its central diagnostic clock.
+> **Historical public-data case study.** The findings do not describe current Olist performance.
 
-The decision is where to investigate and pilot improvements first. These data do not identify a carrier, route event, cost, or causal effect. The clock is a distinctive frame for this project; no claim of global novelty is made.
+**[Read the shareholder story](report.html)** · **[Open the historical diagnostic](dashboard.html)** · **[Review the methodology](docs/METHODS.md)**
 
-## What the evidence says
+## Executive finding
 
-| Question | Finding | Decision implication |
-| --- | --- | --- |
-| How large is the problem? | **6,503 of 94,702** eligible delivered orders arrived after the promised calendar date (**6.87%**). | Keep the denominator explicit; unresolved orders are a separate problem. |
-| Was risk steady? | February–March 2018 purchases produced **2,254 late orders**, **34.7%** of all late orders from **14.3%** of deliveries. | Investigate the surge as a historical incident before generalizing a permanent fix. |
-| Was the promise already missed at handoff? | Only **322 of 6,500** late orders with valid stage dates were already past the promise at handoff. **69.4%** still had more than 14 days left. | Examine transit and lane events as well as seller handoff. |
-| Would a short-buffer alert solve most misses? | At **three or fewer days left**, 1,162 orders are flagged; 680 were late (**58.5% precision**) but they are only **10.5%** of stage-eligible late orders. | Use it for a focused intervention, not the whole recovery strategy. |
-| Do location gaps remain after mix adjustment? | Rio de Janeiro and Bahia each had about **1.8 times** the late deliveries expected from purchase-month and promise-length mix. | Prioritize comparable lane investigations; do not infer cause from state alone. |
-| Do customers notice? | Low-review rates were **58.1% for late** versus **9.4% for on-time** among comparable reviewed orders after state and month standardization. | Measure customer outcomes in a pilot; this is an association. |
+| Eligible deliveries | Late deliveries | Late-delivery rate |
+| ---: | ---: | ---: |
+| **94,702** | **6,503** | **6.9%** |
 
-## The graphs
+Roughly **one in fifteen** eligible deliveries arrived after the promised date. February–March 2018 generated **34.7% of late deliveries from only 14.3% of eligible volume**.
 
-Orange marks late delivery risk, blue marks the cohort or on-time comparison, and red/green mark above/below expected state risk. Values and labels carry the meaning without color alone.
+## The shareholder story
 
-![Monthly late delivery rate with the February to March 2018 surge highlighted in orange](assets/monthly-late-rate.png)
+| Question | Evidence-backed answer |
+| --- | --- |
+| **How large is the problem?** | **6,503 of 94,702** eligible completed deliveries were late: **6.87%**. |
+| **When did failures concentrate?** | February–March 2018 produced **34.7% of late deliveries from 14.3% of volume**. November 2017 was another visible incident. |
+| **When was intervention possible?** | A true **0–3 day pre-breach warning** flagged 840 orders. It was **42.6% precise**, but captured only **5.5%** of stage-eligible late orders. |
+| **Where should investigation begin?** | Rio de Janeiro had approximately **661 excess late deliveries** after basic adjustment; Bahia followed with approximately **176**. |
+| **Can promise policy conceal slow service?** | Orders promised beyond 30 days had a **5.0% late rate**, yet still took a median **15 days** to arrive. |
+| **Why does this matter?** | In comparable groups, low-review rates were **58.1% for late** versus **9.4% for on-time** deliveries—a **48.7-point gap**. |
+| **What should be tested?** | A randomized pre-breach warning, an RJ/BA route pilot, and a promise-and-communication experiment. |
 
-The surge is visible by **purchase month**. Partial August 2018 is excluded from this trend.
+## Visual evidence
 
-![Late rate by days remaining at carrier handoff](assets/handoff-slack.png)
+### Failures concentrated in November 2017 and February–March 2018
 
-Handoff slack identifies a small high-risk group, while the majority of late orders had a much longer buffer.
+Late-order volume and late rate rise together during the principal incidents. March 2018 reached a **19.0% late rate**.
 
-![Observed versus expected late deliveries by customer state, red above expectation and green below](assets/state-risk-gap.png)
+![Monthly late-order count and late-delivery rate. November 2017 and February–March 2018 are highlighted in orange.](assets/monthly-late-rate.png)
 
-State ratios use pooled rates within purchase-month and promise-length cells; this is descriptive adjustment.
+### The actionable warning window has high risk but narrow reach
 
-![Low review rate for on-time and late deliveries, using blue and orange](assets/review-association.png)
+Orders handed off with **0–3 days remaining** were late 42.6% of the time, but represented only 5.5% of stage-eligible late orders. Already-breached orders remain a separate escalation population.
 
-Low review means a mean order review score of 1 or 2. The comparison is standardized over comparable state and month strata.
+![Late-delivery risk within each handoff window and each window's share of all late deliveries.](assets/handoff-slack.png)
 
-## Data and method
+### Investigation should start with absolute excess failures
 
-Source: [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/olistbr/brazilian-ecommerce/home/). This analysis is **not a live view of Olist**. The purchase cohort begins January 1, 2017 and ends August 18, 2018, 60 days before the last observed delivery. The headline rate includes only delivered orders with actual and estimated delivery dates. Other statuses are counted separately, not treated as on time.
+Rio de Janeiro and Bahia combine elevated adjusted risk with the largest operational burden. Ceará has higher relative risk than its absolute excess count suggests.
 
-The unit is one order. Items and reviews are aggregated before joining. Delivery is late when the **actual delivery calendar date** is later than the **estimated delivery calendar date**. Stage analyses require valid, ordered carrier and delivery timestamps. The state comparison is observed late orders divided by expected late orders using pooled late rates in purchase-month × promise-length cells, for states with at least 1,000 eligible deliveries. See [methods and hard questions](docs/METHODS.md) for definitions, caveats, and the proposed pilot.
+![Excess late deliveries by customer state, led by Rio de Janeiro and Bahia.](assets/state-risk-gap.png)
+
+### Late delivery is strongly associated with poor reviews
+
+After restricting comparison to common state-by-month support, **58.1% of late deliveries received low reviews versus 9.4% of on-time deliveries**. This is an association, not proof of causation.
+
+![Low-review rates for comparable on-time and late deliveries, showing a 48.7 percentage-point difference.](assets/review-association.png)
+
+## What to test next
+
+1. **Pre-breach warning:** randomize the 0–3 day alert and measure incremental on-time delivery, not alert precision alone.
+2. **RJ/BA route pilot:** target high-burden lanes and compare late orders per 1,000 eligible deliveries against a holdout.
+3. **Promise and communication test:** compare clearer promises and proactive updates using actual delivery time, late rate, and review outcomes.
+
+These are controlled tests, not proven interventions. The public dataset contains no treatment, carrier-cost, refund, or contribution-margin data.
+
+## Analytical safeguards
+
+- The fixed purchase window runs from **January 1, 2017 through August 18, 2018**.
+- The headline population contains completed deliveries with actual and promised timestamps. Other statuses remain separate.
+- “Late” means the actual delivery calendar date is after the promised calendar date.
+- Already-breached orders are separated from the actionable 0–3 day warning population.
+- Seller deadline comparisons use exact timestamps, including same-day late handoffs.
+- State estimates adjust for purchase month and promised-delivery window; order-level bootstrap intervals show uncertainty.
+- Review standardization retains **68,416 orders**, or **72.7% of reviewed orders**, across comparable state × month strata.
+- The analysis makes no causal, financial-return, or current-performance claim.
+
+See [METHODS.md](docs/METHODS.md) for metric definitions, observation rules, uncertainty, sensitivity checks, and validation coverage.
 
 ## Reproduce the analysis
 
-The raw Olist CSVs are intentionally not committed. Download them from the [dataset page](https://www.kaggle.com/olistbr/brazilian-ecommerce/home/) and place `olist_orders_dataset.csv`, `olist_order_items_dataset.csv`, `olist_customers_dataset.csv`, `olist_order_reviews_dataset.csv`, and `olist_products_dataset.csv` in `data/raw/`.
-
-`data/source_manifest.json` records the checked source snapshot. `analyze.py` and `validate.py` verify the five CSV checksums before using them. If Kaggle publishes a different revision, review its changes and update the manifest with the new provenance before rebuilding the report.
-
-From the repository root, with Python 3.10 or newer:
+The recorded data snapshot is checked against [`data/source_manifest.json`](data/source_manifest.json) before analysis.
 
 ```powershell
 python -m pip install -r requirements.txt
@@ -62,20 +91,26 @@ python build_dashboard.py
 python make_figures.py
 ```
 
-`analyze.py` rebuilds aggregate CSVs and a local order-level table. `validate.py` independently checks headline counts with DuckDB. The report builders refresh the canonical JSON manifests; `make_figures.py` exports the four README graphs. The committed HTML files were exported from those manifests with the Data Analytics portable artifact reader and can be opened directly. That reader is an external build dependency for **re-exporting HTML** after changing a manifest; the Python analysis and PNG graphs rebuild from the listed requirements.
+| Component | Responsibility |
+| --- | --- |
+| [`analyze.py`](analyze.py) | Builds corrected order-level aggregates, intervals, findings, and build metadata. |
+| [`validate.py`](validate.py) | Independently recomputes headline, intervention, seller, review, and output reconciliations. |
+| [`build_report.py`](build_report.py) | Creates the primary scrolling story with inline SVG, accessible tooltips, evidence tables, and offline fallbacks. |
+| [`build_dashboard.py`](build_dashboard.py) | Creates the compact historical diagnostic. |
+| [`make_figures.py`](make_figures.py) | Regenerates the four README figures from validated outputs. |
 
 ## Repository map
 
 | Path | Purpose |
 | --- | --- |
-| [`report.html`](report.html) · [`dashboard.html`](dashboard.html) | Portable interactive deliverables |
-| [`assets/`](assets/) | Four publication-ready PNG graphs |
-| [`outputs/`](outputs/) | Reviewed aggregate CSVs and findings JSON |
-| [`artifact.json`](artifact.json) · [`dashboard-artifact.json`](dashboard-artifact.json) | Source-backed portable manifests |
-| [`analyze.py`](analyze.py) · [`validate.py`](validate.py) | Analysis and independent reconciliation |
-| [`build_report.py`](build_report.py) · [`build_dashboard.py`](build_dashboard.py) · [`make_figures.py`](make_figures.py) | Artifact and graph builders |
-| [`docs/METHODS.md`](docs/METHODS.md) | Metric definitions, unanswered questions, and pilot design |
+| [`report.html`](report.html) | Primary seven-question shareholder story |
+| [`dashboard.html`](dashboard.html) | Secondary historical diagnostic |
+| [`outputs/`](outputs/) | Corrected aggregates, findings, intervals, and build metadata |
+| [`assets/`](assets/) | Static chart fallbacks and README figures |
+| [`docs/METHODS.md`](docs/METHODS.md) | Definitions, uncertainty, sensitivity, and test design |
 
-## Limits and licensing
+## Data source and licensing
 
-The public tables lack carrier identity, hub scans, delivery attempts, inventory positions, carrier invoices, refunds, and contribution margin. Freight value is a customer charge, not a delivery cost. No cost-saving or causal claim is possible from this extract. See [data attribution and terms](DATA_LICENSE.md): Olist data and adaptations are subject to CC BY-NC-SA 4.0. The Python source has a separate [MIT code license](LICENSE-CODE).
+Data source: [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/olistbr/brazilian-ecommerce/home/). Dataset use and adaptations follow [DATA_LICENSE.md](DATA_LICENSE.md). Repository code is released under the [MIT License](LICENSE-CODE).
+
+**Keywords:** Olist · delivery analytics · ecommerce analytics · logistics intelligence · late-delivery prediction · customer experience · review analysis · data storytelling · shareholder reporting · Python · DuckDB · reproducible analytics

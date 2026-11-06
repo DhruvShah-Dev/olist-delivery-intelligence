@@ -1,5 +1,9 @@
 {
   "source": "https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce",
+  "dataset_title": "Brazilian E-Commerce Public Dataset by Olist",
+  "dataset_version": "Kaggle public snapshot; provider version identifier not retained",
+  "snapshot_recorded_at": "2026-10-07",
+  "license": "CC BY-NC-SA 4.0",
   "verified_against": "olist-crm-erp-analytics/data/raw/source_manifest.json (2026-10-07)",
   "files": {
     "olist_orders_dataset.csv": {

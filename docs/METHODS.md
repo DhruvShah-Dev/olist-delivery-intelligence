@@ -1,35 +1,63 @@
-# Methods, hard questions, and proposed tests
+# Methods, uncertainty, and proposed tests
 
 ## Population and definitions
 
-- **Source and time:** Historical Olist orders. Purchases from 2017-01-01 through 2018-08-18 13:22:46, a 60-day maturity buffer before the last observed customer delivery on 2018-10-17.
-- **Headline denominator:** 94,702 orders marked delivered with actual customer delivery and estimated delivery dates. There were 97,559 orders of all statuses in the purchase cohort. The gap is excluded, not assumed on time or lost.
-- **Late order:** Actual delivery **date** after the estimated delivery **date**. Same-day delivery counts on time regardless of hour.
-- **Order grain:** One row per order. Order items are grouped before joining; reviews are averaged to one order score before joining. Payment rows are not used.
-- **Stage eligibility:** Nonnegative purchase-to-handoff, handoff-to-delivery, and purchase-to-promise intervals. One delivered order lacks a carrier timestamp and 174 have invalid stage chronology; stage metrics exclude those records. Of 6,503 late orders, 6,500 have eligible stage data.
-- **Handoff slack:** Estimated delivery calendar date minus carrier handoff calendar date. A short-buffer alert means at most three days remain. Alert counts and precision are retrospective measures.
-- **State adjustment:** Expected late orders sum pooled late rates in purchase-month × promise-length cells over each state's orders. Observed / expected above 1 signals more late orders than this simple mix predicts. Displayed states have at least 1,000 eligible deliveries.
-- **Review comparison:** A low review is a mean order score of at most 2. Standardized late and on-time rates use comparable customer-state × purchase-month strata. Review coverage is 99.3% of the headline delivered cohort; response selection remains possible.
+- **Fixed purchase window:** January 1, 2017 through August 18, 2018 13:22:46. The observation end is October 17, 2018 13:22:46.
+- **Headline denominator:** 94,702 completed deliveries with actual and promised delivery dates. The purchase cohort contains 97,559 orders; other statuses are reported separately.
+- **Promise-maturity sensitivity:** Requiring the promised date to fall before the observation end retains 94,700 completed deliveries. Adding a 30-day grace retains 94,539. The main completed-delivery rate uses the fixed purchase window and does not present this as a per-order 60-day rule.
+- **Late delivery:** Actual delivery calendar date after the estimated delivery calendar date. Same-day delivery counts as on time.
+- **Order grain:** One row per order. Items are aggregated before joining. Multiple review rows are averaged to an order-level score.
+- **Stage eligibility:** Nonnegative purchase-to-handoff, handoff-to-delivery, and purchase-to-promise intervals. One delivery lacks a carrier timestamp and 174 have invalid chronology. Of 6,503 late deliveries, 6,500 have valid stage data.
+- **Handoff states:** `past promise` means the promised date was already breached at handoff. The actionable warning population is strictly **0–3 calendar days remaining**. The groups are mutually exclusive.
+- **Seller deadline:** Exact carrier-handoff timestamp compared with the latest item shipping-limit timestamp for single-seller orders. Same-day but after-time handoffs count as after deadline.
+- **State adjustment:** Expected late orders use pooled late rates within purchase-month × promise-window cells. Excess late orders equal observed minus expected. Displayed states have at least 1,000 eligible deliveries.
+- **Low review:** Mean order review score of 1 or 2. Standardized rates use state × purchase-month strata with at least 10 late and 10 on-time reviewed orders.
 
-## Questions a headline SLA overlooks
+## Decision evidence
 
-| Question | Answer supported by this dataset | Remaining uncertainty |
+| Question | Supported answer | Limit |
 | --- | --- | --- |
-| Was the promise already impossible at carrier handoff? | 322 of 6,500 stage-eligible late orders were already past the promise at handoff. | Handoff time does not expose pickup attempts, warehouse holds, or scans. |
-| Can a handoff alert catch most late deliveries? | At ≤3 days, precision is 680/1,162 = 58.5%; recall is 680/6,500 = 10.5%. | The useful threshold depends on capacity, costs, and lead time. |
-| Is risk temporary or broad? | February–March 2018 accounts for 34.7% of late orders but 14.3% of deliveries. | No incident, weather, labor, or capacity records explain the spike. |
-| Are regions comparable? | State ratios adjust only purchase month and promise length. RJ and BA are about 1.8. | Origin-destination lanes and carrier mix may explain the residual. |
-| Could a better SLA be cosmetic? | Longer promises can lower the measured late rate without faster delivery. The report displays actual time alongside promise cohorts. | Conversion and expectation data are needed to judge promise-policy changes. |
-| Did seller delay cause transit misses? | Single-seller orders handed off after their shipping limit have higher late rates. | Seller mix, products, destinations, and carrier schedules may confound this. |
-| What is the financial return? | It cannot be calculated. Freight value is charged to the buyer, not actual freight expense. | Need carrier invoices, refunds, support contacts, margin, and intervention costs. |
-| What about orders never delivered? | They are outside the delivered-order late-rate denominator and reported separately by status. | A full fulfillment KPI needs mature, resolved orders and cancellation reasons. |
+| How large is the problem? | 6,503 of 94,702 eligible completed deliveries were late: 6.87%. | This is not an all-order fulfillment KPI; unresolved statuses are separate. |
+| When did failures concentrate? | February–March 2018 contributed 2,254 late deliveries, 34.7% of all late deliveries from 14.3% of volume. November 2017 was another spike. | Weather, labor, capacity, and carrier events are unavailable. |
+| Was intervention possible? | The 0–3 day warning flags 840 orders; 358 were late: 42.6% precision and 5.5% recall. Another 322 late orders were already breached at handoff. | Retrospective classification does not prove an intervention can recover an order. |
+| Where should investigation begin? | RJ had about 661 excess late deliveries and BA about 176 after basic adjustment. | Origin, destination lane, carrier, and route events are missing. |
+| Can promise policy conceal slow service? | More-than-30-day promises had a 5.0% late rate but a median actual delivery time near 15 days. | Conversion and customer expectation measures are unavailable. |
+| Why does it matter? | Standardized low-review rates were 58.1% late versus 9.4% on time. | Common support retains 68,416 orders; delivery and review are associated, not causally isolated. |
 
-## A decision-ready pilot
+## Uncertainty
 
-1. **Instrument the journey:** Collect seller ready time, carrier pickup, hub scans, delivery attempts, carrier, origin-destination lane, promised date, and costs at order grain.
-2. **Pilot the handoff alert:** Apply the ≤3-day trigger to a randomized subset of eligible orders. Record interventions, false alarms, recovered deliveries, cost, and customer outcomes. Keep a holdout.
-3. **Investigate long-slack misses:** Segment the 69.4% of stage-eligible late orders that had >14 days at handoff by comparable lane and promise cohort. Prioritize lanes by absolute late volume, then test a route-specific change.
-4. **Measure customer outcomes:** Track actual delivery time, late rate, low reviews, support contacts, and refunds. A later promised date alone is not evidence of improved service.
-5. **Report uncertainty:** Compare pilot and holdout on the same eligibility rule and period. Publish counts, effects with uncertainty intervals, and costs before scaling.
+State excess and review differences use 1,000 deterministic stratified order-bootstrap replicates. Within each state × month × promise cell—or review common-support cell—resampling binary outcomes is equivalent to a binomial draw with the observed cell rate.
 
-The project provides a prioritization framework and hypotheses. It does not establish that a specific carrier, seller, or route caused the observed misses.
+Intervals describe sampling variation around the historical adjusted comparison. They do not correct omitted carriers, routes, products, service recovery, or other unmeasured factors.
+
+## Validation coverage
+
+`validate.py` independently checks:
+
+1. headline orders, late deliveries, and February–March late deliveries directly from source orders;
+2. stage eligibility, breached orders, the mutually exclusive 0–3 day warning, precision, recall, and long-slack share;
+3. exact-timestamp seller deadline populations and rates;
+4. review common-support counts and standardized rates using independent DuckDB SQL;
+5. aggregate reconciliation across monthly, promise, handoff, state, review, and interval outputs.
+
+## Three proposed tests
+
+### 1. Pre-breach warning
+
+- Randomize eligible 0–3 day orders to intervention or holdout.
+- Track actual delivery time, late rate, recovered deliveries, false alarms, cost, and customer outcomes.
+- Scale only when the interval excludes zero and cost per recovered order is acceptable.
+
+### 2. RJ and BA route pilot
+
+- Add carrier, seller origin, pickup, hub, lane, and delivery-attempt events.
+- Compare comparable lanes using randomized or carefully matched holdouts.
+- Stop if the apparent improvement comes only from extending promised dates.
+
+### 3. Promise and communication test
+
+- Test clearer promise setting and proactive updates independently where possible.
+- Measure conversion, actual speed, late rate, low reviews, contacts, and refunds.
+- Do not scale if the SLA improves while actual delivery speed does not.
+
+Historical evidence identifies where to test—not what is already proven.
